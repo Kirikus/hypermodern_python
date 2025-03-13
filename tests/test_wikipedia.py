@@ -1,9 +1,9 @@
 """Test cases for the wikipedia module."""
+
 from unittest.mock import Mock
 
 import click
 import pytest
-
 from hypermodern_python import wikipedia
 
 
