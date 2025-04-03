@@ -7,9 +7,8 @@ jobs:
     name: RuffJob
     runs-on: ubuntu-latest
     steps:
-      - name: format
-        uses: actions/checkout@v4
-        uses: astral-sh/ruff-action@v3
+      - uses: actions/checkout@v4
+      - uses: astral-sh/ruff-action@v3
         with:
           args: "format --check --diff"
           src: >-
@@ -19,9 +18,8 @@ jobs:
             noxfile.py
             docs/conf.py
 
-      - name: lint
-        uses: actions/checkout@v4
-        uses: astral-sh/ruff-action@v3
+      - uses: actions/checkout@v4
+      - uses: astral-sh/ruff-action@v3
         with:
           args: "check --fix"
           src: >-
