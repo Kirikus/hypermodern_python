@@ -12,7 +12,20 @@ jobs:
         uses: astral-sh/ruff-action@v3
         with:
           args: "format --check --diff"
+          src: >-
+            src/
+            tests/
+            plots/
+            noxfile.py
+            docs/conf.py
+
       - name: lint
         uses: astral-sh/ruff-action@v3
         with:
           args: "check --fix"
+          src: >-
+            src/
+            tests/
+            plots/
+            noxfile.py
+            docs/conf.py
