@@ -64,10 +64,10 @@ def pytype(session: Session) -> None:
 @nox_poetry.session(python=["3.12"])
 def tests(session: Session) -> None:
     """Run the test suite."""
-    args = session.posargs or ["--cov", "-m", "not e2e"]
+    args = session.posargs or ["--cov", "--cov-fail-under=50"]
     session.run("poetry", "install", "--only=main", external=True)
-    session.install("coverage[toml]", "pytest", "pytest-cov", "pytest-mock")
-    session.run("pytest", *args)
+    session.install("pytest", "pytest-mock", "coverage[toml]", "codecov", "pytest-cov")
+    session.run("poetry", "run", "pytest", *args)
 
 
 @nox_poetry.session(python=["3.12"])
