@@ -1,7 +1,5 @@
-[![Tests](https://github.com/cjolowicz/hypermodern-python/workflows/Tests/badge.svg)](https://github.com/cjolowicz/hypermodern-python/actions?workflow=Tests)
-[![Codecov](https://codecov.io/gh/cjolowicz/hypermodern-python/branch/master/graph/badge.svg)](https://codecov.io/gh/cjolowicz/hypermodern-python)
-[![PyPI](https://img.shields.io/pypi/v/hypermodern-python.svg)](https://pypi.org/project/hypermodern-python/)
-[![Read the Docs](https://readthedocs.org/projects/hypermodern-python/badge/)](https://hypermodern-python.readthedocs.io/)
+[![Tests](https://github.com/Kirikus/hypermodern_python/workflows/Tests/badge.svg)](https://github.com/Kirikus/hypermodern_python/actions?workflow=Tests)
+[![Codecov](https://codecov.io/gh/Kirikus/hypermodern_python/branch/master/graph/badge.svg)](https://codecov.io/gh/Kirikus/hypermodern_python)
 
 # hypermodern-python
 
