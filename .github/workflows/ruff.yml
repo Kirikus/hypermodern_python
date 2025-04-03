@@ -13,6 +13,7 @@ jobs:
          python-version: ${{ matrix.python-version }}
          architecture: x64
       - run: pip install ruff==0.9.10
+      - run: ruff format src/ tests/ docs/ noxfile.py docs/conf.py
       - uses: astral-sh/ruff-action@v3
         with:
           args: "check --fix"
