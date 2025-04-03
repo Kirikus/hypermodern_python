@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: format
+        uses: actions/checkout@v4
         uses: astral-sh/ruff-action@v3
         with:
           args: "format --check --diff"
@@ -19,6 +20,7 @@ jobs:
             docs/conf.py
 
       - name: lint
+        uses: actions/checkout@v4
         uses: astral-sh/ruff-action@v3
         with:
           args: "check --fix"
