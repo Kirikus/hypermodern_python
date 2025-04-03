@@ -7,11 +7,11 @@ jobs:
   ruff:
     name: RuffJob
     steps:
-      - format:
-        uses:astral-sh/ruff-action@v3
+      - name: format
+        uses: astral-sh/ruff-action@v3
         with:
           args: "format --check --diff"
-      - lint:
-        uses:astral-sh/ruff-action@v3
+      - name: lint
+        uses: astral-sh/ruff-action@v3
         with:
           args: "check --fix"
