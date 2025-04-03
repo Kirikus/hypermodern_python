@@ -6,6 +6,7 @@ defaults:
 jobs:
   ruff:
     name: RuffJob
+    runs-on: ubuntu-latest
     steps:
       - name: format
         uses: astral-sh/ruff-action@v3
