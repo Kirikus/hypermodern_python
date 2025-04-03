@@ -1,0 +1,17 @@
+name: Ruff
+on: push
+defaults:
+  run:
+    shell: bash
+jobs:
+  ruff:
+    name: RuffJob
+    steps:
+      - format:
+        uses:astral-sh/ruff-action@v3
+        with:
+          args: "format --check --diff"
+      - lint:
+        uses:astral-sh/ruff-action@v3
+        with:
+          args: "check --fix"
