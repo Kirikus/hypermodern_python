@@ -27,9 +27,8 @@ class FileStats:
     @classmethod
     def count_data(cls, file: Path) -> Self:
         """Generate stats for a single file."""
-        chunk_size = 65536  # 64 KB
+        chunk_size = 2**16  # 64 KB
         line_count, word_count, character_count, byte_count = 0, 0, 0, 0
-        buffer = ""
         end_whitespace = True
 
         with file.open("br") as f:
@@ -37,28 +36,17 @@ class FileStats:
             while True:
                 chunk = f.read(chunk_size)
                 if not chunk:
-                    # Process the remaining buffer
-                    if buffer:
-                        word_count += len(buffer.split())
                     break
-
-                byte_count += len(chunk)
                 text = chunk.decode("utf-8", errors="ignore")
 
+                byte_count += len(chunk)
                 line_count += text.count("\n")
-
-                buffer += text
-                word_counts_in_buffer = buffer.split()
-                if len(word_counts_in_buffer) > 1:
-                    word_count += len(word_counts_in_buffer)
-                    if end_whitespace or buffer[0].isspace():
-                        word_count -= 1
-                    buffer = word_counts_in_buffer[-1]
-                else:
-                    buffer = word_counts_in_buffer[0] if word_counts_in_buffer else ""
-
-                end_whitespace = text[-1].isspace()
                 character_count += len(text)
+
+                word_count += len(text.split())
+                if not (end_whitespace or text[0].isspace()):
+                    word_count -= 1
+                end_whitespace = text[-1].isspace()
 
         return cls(
             line_count=line_count + 1,
