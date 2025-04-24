@@ -1,5 +1,5 @@
 [![Tests](https://github.com/Kirikus/hypermodern_python/workflows/Tests/badge.svg)](https://github.com/Kirikus/hypermodern_python/actions?workflow=Tests)
-[![Codecov](https://codecov.io/gh/Kirikus/hypermodern_python/branch/master/graph/badge.svg)](https://codecov.io/gh/Kirikus/hypermodern_python)
+[![Coverage Status](https://coveralls.io/repos/github/Kirikus/hypermodern_python/badge.svg?branch=main)](https://coveralls.io/github/Kirikus/hypermodern_python?branch=main)
 
 # hypermodern-python
 
