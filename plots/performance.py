@@ -28,8 +28,8 @@ for f in files:
                 """process_file_or_dir(
                     path, mask=Mask(byte_count=True, character_count=True, word_count=True, line_count=True),
                 ),""",
-                globals={"process_file_or_dir":process_file_or_dir, "Mask":Mask, "path":path},
-                number=10
+                globals={"process_file_or_dir": process_file_or_dir, "Mask": Mask, "path": path},
+                number=10,
             )
             times.append(time)
 

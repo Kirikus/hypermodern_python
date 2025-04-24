@@ -1,10 +1,10 @@
 """Sphinx configuration."""
 
-from datetime import datetime, timezone
-import os
 import sys
+from datetime import datetime, timezone
+from pathlib import Path
 
-sys.path.append(os.path.abspath('../src/'))
+sys.path.append(str((Path("..") / "src").resolve()))
 
 project = "PyWC"
 author = "Dmitry Derbyshev"

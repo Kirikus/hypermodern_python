@@ -99,8 +99,7 @@ def coverage(session: Session) -> None:
 @nox_poetry.session(python="3.12")
 def docs(session: Session) -> None:
     """Build the documentation."""
-    session.run("poetry", "install", external=True)
-    #session.run("poetry", "install", "--only=main", external=True)
+    session.run("poetry", "install", "--only=main", external=True)
     session.install(
         "sphinx",
         "myst-parser",
