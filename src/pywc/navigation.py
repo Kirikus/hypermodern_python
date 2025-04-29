@@ -44,8 +44,6 @@ def process_file_or_dir(
     """Calculate stats for a file or recursively go into a directory."""
     if not file.exists():
         return FileStats()
-    if is_ignored(file, ignored_extensions=ignored_extensions, ignored_names=ignored_names):
-        return FileStats()
     if file.is_file():
         return process_file(
             file,
@@ -53,6 +51,8 @@ def process_file_or_dir(
             ignored_extensions=ignored_extensions,
             ignored_names=ignored_names,
         )
+    if is_ignored(file, ignored_extensions=ignored_extensions, ignored_names=ignored_names):
+        return FileStats()
     total = FileStats()
     for f in file.iterdir():
         total += process_file_or_dir(

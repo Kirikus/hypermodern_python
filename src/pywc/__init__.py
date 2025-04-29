@@ -1,12 +1,5 @@
 """The hypermodern Python project."""
 
-try:
-    from importlib.metadata import PackageNotFoundError, version
-except ImportError:
-    from importlib_metadata import PackageNotFoundError, version
+from importlib.metadata import version
 
-
-try:
-    __version__ = version(__name__)
-except PackageNotFoundError:  # pragma: no cover
-    __version__ = "unknown"
+__version__ = version(__name__)

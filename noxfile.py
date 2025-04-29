@@ -64,7 +64,7 @@ def pytype(session: Session) -> None:
 @nox_poetry.session(python=["3.12"])
 def tests(session: Session) -> None:
     """Run the test suite."""
-    args = session.posargs or ["--cov", "--cov-fail-under=50"]
+    args = session.posargs or ["--cov", "--cov-fail-under=100"]
     session.run("poetry", "install", "--only=main", external=True)
     session.install("pytest", "pytest-mock", "coverage[toml]", "codecov", "pytest-cov")
     session.run("poetry", "run", "pytest", *args)
@@ -91,9 +91,9 @@ def xdoctest(session: Session) -> None:
 @nox_poetry.session(python="3.12")
 def coverage(session: Session) -> None:
     """Upload coverage data."""
-    session.install("coverage[toml]", "codecov")
-    session.run("coverage", "xml", "--fail-under=0")
-    session.run("codecov", *session.posargs)
+    session.install("coveralls")
+    session.run("coverage", "xml", "--fail-under=100")
+    session.run("coveralls")
 
 
 @nox_poetry.session(python="3.12")

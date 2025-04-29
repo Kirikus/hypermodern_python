@@ -73,5 +73,5 @@ def main(  # noqa: PLR0913
     )
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     main()
