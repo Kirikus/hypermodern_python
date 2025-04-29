@@ -19,3 +19,4 @@ jobs:
     - run: nox --sessions tests coverage
       env:
         CODECOV_TOKEN: ${{secrets.COVERALL_TOKEN}}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
