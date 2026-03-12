@@ -1,14 +1,26 @@
+[build-system]
+build-backend = "uv_build"
+requires = [ "uv-build>=0.7.20,<0.8" ]
+
 [project]
 name = "hypermodern-python"
 version = "0.1.0"
-description = "Redesigned course based on older articles \"Hypermodern Python\" by Claudio Jolowicz."
+description = 'Redesigned course based on older articles "Hypermodern Python" by Claudio Jolowicz.'
 readme = "README.md"
-authors = [
-    { name = "Dersbyshev Dmitry", email = "kirikusan@gmail.com" }
-]
+authors = [ { name = "Dersbyshev Dmitry", email = "kirikusan@gmail.com" } ]
 requires-python = ">=3.14"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.14",
+]
 dependencies = []
 
-[build-system]
-requires = ["uv_build>=0.7.20,<0.8"]
-build-backend = "uv_build"
+[dependency-groups]
+dev = [
+  "pyproject-fmt>=2.18.1",
+]
+
+[tool.pyproject-fmt]
+table_format = "long"  # Expand all tables by default
+collapse_tables = [ "project" ]  # Collapse project sub-tables
+expand_tables = [ "project.optional-dependencies" ]  # But expand this specific one
