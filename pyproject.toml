@@ -68,3 +68,4 @@ pydocstyle.convention = "google"  # alternatives - "numpy" or "pep257"
 table_format = "long"  # Expand all tables by default
 collapse_tables = [ "project" ]  # Collapse project sub-tables
 expand_tables = [ "project.optional-dependencies" ]  # But expand this specific one
+keep_full_version = true
