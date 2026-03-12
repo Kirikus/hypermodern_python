@@ -18,7 +18,51 @@ dependencies = []
 [dependency-groups]
 dev = [
   "pyproject-fmt>=2.18.1",
+  "ruff>=0.15.5",
 ]
+
+[tool.ruff]
+target-version = "py314"
+line-length = 120
+indent-width = 4
+[tool.ruff.format]
+indent-style = "space"
+quote-style = "double"
+[tool.ruff.lint]
+select = [ "ALL" ]
+ignore = [
+  "AIR",    # Airflow is not used
+  "COM812", # missing-trailing-comma
+  "COM819", # prohibited-trailing-comma
+  "DJ",     # django is not used
+  "E111",   # indentation-with-tabs
+  "E114",   # indentation-with-tabs-comment
+  "E117",   # over-indented
+  "FAST",   # FastAPI is not used
+  "FIX",    # TODOs are allowed and encouraged
+  "G",      # logging is not used
+  "INT",    # gettext is not used
+  "LOG",    # logging is not used
+  # "D206",    # docstring-tab-indentation
+  # "D300",    # triple-single-quotes
+  "Q000",   # bad-quotes-inline-string
+  "Q001",   # bad-quotes-multiline-string
+  "Q002",   # bad-quotes-docstring
+  "Q003",   # avoidable-escaped-quote
+  "Q003",   # avoidable-escaped-quote
+  "Q004",   # unnecessary-escaped-quote
+  # "NPY",   # numpy may be used
+  # "PD",    # pandas may be used
+  # "PT",    # pytest is used
+
+  # Docstring style deselects D rules automatically
+
+  # Recommended against using these rule alongside the formatter
+  "W191",   # tab-indentation
+]
+per-file-ignores."tests/*.py" = [ "S101" ]
+fixable = [ "ALL" ]
+pydocstyle.convention = "google"  # alternatives - "numpy" or "pep257"
 
 [tool.pyproject-fmt]
 table_format = "long"  # Expand all tables by default
