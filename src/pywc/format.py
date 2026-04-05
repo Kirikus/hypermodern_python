@@ -42,6 +42,14 @@ def format_automatic(counts: FileStats, flags: CounterFlags, name: str | None = 
 
 
 def formatter_wrapper_print(formatter: FormatterT) -> FormatterT:
+    """Add sideeffect of printing to formatter wrapper.
+
+    Arguments:
+        formatter(FormatterT): undecorated formatter wrapper.
+
+    Returns:
+        FormatterT: decorated formatter wrapper that calls `print()` on result.
+    """
     def wrapped(stats: FileStats, flags: CounterFlags, name: str | None = None) -> str:
         ret = formatter(stats, flags, name)
         print(ret)  # noqa: T201
