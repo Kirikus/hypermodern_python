@@ -5,3 +5,4 @@ pywc.data module
    :members:
    :show-inheritance:
    :undoc-members:
+   :exclude-members: lines, words, chars, bytes
