@@ -3,7 +3,7 @@ build-backend = "uv_build"
 requires = [ "uv-build>=0.7.20,<0.8" ]
 
 [project]
-name = "hypermodern-python"
+name = "pywc"
 version = "0.1.0"
 description = 'Redesigned course based on older articles "Hypermodern Python" by Claudio Jolowicz.'
 readme = "README.md"
