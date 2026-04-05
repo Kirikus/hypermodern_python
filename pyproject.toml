@@ -18,6 +18,7 @@ dependencies = []
 [dependency-groups]
 dev = [
   "myst-parser>=5.0.0",
+  "pydoclint>=0.8.3",
   "pyproject-fmt>=2.18.1",
   "pytest>=9.0.2",
   "pytest-clarity>=1.0.1",
@@ -35,6 +36,7 @@ dev = [
 target-version = "py314"
 line-length = 120
 indent-width = 4
+exclude = [ "docs" ]
 [tool.ruff.format]
 indent-style = "space"
 quote-style = "double"
@@ -76,7 +78,11 @@ per-file-ignores."tests/*.py" = [
   "PT011",  # Allow pytest.raises(Exception) without precise message
 ]
 fixable = [ "ALL" ]
+external = [ "DOC101", "DOC103" ]
 pydocstyle.convention = "google"  # alternatives - "numpy" or "pep257"
+
+[tool.pydoclint]
+skip_checking_short_docstrings = false
 
 [tool.pyproject-fmt]
 table_format = "long"  # Expand all tables by default

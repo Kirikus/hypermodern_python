@@ -56,7 +56,7 @@ def main(  # noqa: PLR0913
     """Python version of wc command with limited functionality.
 
     Prints wc information of files and directories (recursively) specified in PATHS.
-    """
+    """  # noqa: DOC101, DOC103
     # default mode when no flags are chosen
     if not (byte_count or lines or chars or words):
         chars = words = lines = True
