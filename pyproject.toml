@@ -18,6 +18,13 @@ dependencies = []
 [dependency-groups]
 dev = [
   "pyproject-fmt>=2.18.1",
+  "pytest>=9.0.2",
+  "pytest-clarity>=1.0.1",
+  "pytest-cov>=7.0.0",
+  "pytest-mock>=3.15.1",
+  "pytest-randomly>=4.0.1",
+  "pytest-sugar>=1.1.1",
+  "pytest-xdist>=3.8.0",
   "ruff>=0.15.5",
 ]
 
@@ -60,7 +67,11 @@ ignore = [
   # Recommended against using these rule alongside the formatter
   "W191",   # tab-indentation
 ]
-per-file-ignores."tests/*.py" = [ "S101" ]
+per-file-ignores."tests/*.py" = [
+  "S101",   # Allow asserts
+  "INP001", # Allow missing __init__.py
+  "PT011",  # Allow pytest.raises(Exception) without precise message
+]
 fixable = [ "ALL" ]
 pydocstyle.convention = "google"  # alternatives - "numpy" or "pep257"
 
@@ -69,3 +80,17 @@ table_format = "long"  # Expand all tables by default
 collapse_tables = [ "project" ]  # Collapse project sub-tables
 expand_tables = [ "project.optional-dependencies" ]  # But expand this specific one
 keep_full_version = true
+
+[tool.pytest.ini_options]
+addopts = "--cov"
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false  # ← important: do NOT hide 100% files
+sort = "Cover"  # or "Miss", "Name", etc.
+fail_under = 95
+[tool.coverage.run]
+source = [ "src/pywc" ]
+omit = [
+  "tests/*",
+]
