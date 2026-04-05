@@ -14,10 +14,12 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
 ]
 dependencies = []
+scripts.pywc = "pywc.console:main"
 
 [dependency-groups]
 dev = [
   "myst-parser>=5.0.0",
+  "poethepoet>=0.43.0",
   "pydoclint>=0.8.3",
   "pyproject-fmt>=2.18.1",
   "pytest>=9.0.2",
@@ -90,9 +92,6 @@ collapse_tables = [ "project" ]  # Collapse project sub-tables
 expand_tables = [ "project.optional-dependencies" ]  # But expand this specific one
 keep_full_version = true
 
-[tool.pytest.ini_options]
-addopts = "--cov"
-
 [tool.coverage.report]
 show_missing = true
 skip_covered = false  # ← important: do NOT hide 100% files
@@ -112,3 +111,36 @@ extensions = [
 html_static_path = [ "_static" ]
 templates_path = [ "_templates" ]
 exclude_patterns = [ "_build" ]
+
+[tool.poe.tasks]
+# === Core / Development tasks ===
+test = { cmd = "pytest --cov", help = "Run the test suite with coverage reporting" }
+pywc = { cmd = "pywc", help = "Run the pywc command-line tool" }
+# === Individual code quality / formatting tasks ===
+ruff_format = { cmd = "ruff format", help = "Format Python code using Ruff" }
+ruff_lint = { cmd = "ruff check --fix", help = "Lint Python code with Ruff and fix fixable issues" }
+format_toml = { cmd = "pyproject-fmt pyproject.toml", help = "Format pyproject.toml" }
+pydoclint = { cmd = "pydoclint --style google src", help = "Check docstring style and completeness" }
+# === Documentation generation ===
+doc = { sequence = [
+  { cmd = "sphinx-apidoc -o docs/api --separate src/pywc" },
+  { cmd = "make html", cwd = "docs" },
+], help = "Generate API documentation with sphinx-apidoc and build the HTML docs" }
+
+# === Composite tasks ===
+[tool.poe.tasks.format]
+help = "Run the full formatting and style pipeline (TOML + Ruff format + Ruff lint + docstring check)"
+sequence = [
+  { ref = "format_toml", ignore_fail = true },  # Format-toml returns false if it changes file
+  { ref = "ruff_format" },
+  { ref = "ruff_lint" },
+  { ref = "pydoclint" },
+]
+ignore_fail = "return_non_zero"
+[tool.poe.tasks.lint]
+help = "Run linting only (Ruff + pydoclint)"
+sequence = [
+  { ref = "ruff_lint" },
+  { ref = "pydoclint" },
+]
+ignore_fail = "return_non_zero"
