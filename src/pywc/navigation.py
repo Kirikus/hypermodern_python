@@ -24,7 +24,7 @@ def process_path(
 
     Args:
         path (Path): Path of file or directory to process.
-        flags (CounterFlags | None): Optional counter of file flags to use.
+        flags (CounterFlags): Optional counter of file flags to use.
         ignored_regexps (Iterable[str]): Regexes to ignore.
         formatter (FormatterT | None): Optional formatter, used to print file contents on IO device.
 
