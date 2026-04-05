@@ -40,6 +40,7 @@ class FileStats:
         words (int): Number of words in the file.
         chars (int): Number of characters in the file.
         bytes (int): Number of bytes in the file.
+
     Raises:
         ValueError: Some of the arguments are negative or are in descending order.
     """
@@ -49,7 +50,7 @@ class FileStats:
     chars: int = 0
     bytes: int = 0
 
-    def __post_init__(self) -> None:
+    def __post_init__(self) -> None: # noqa: D105
         if self.lines < 0 or self.words < 0 or self.chars < 0 or self.bytes < 0:
             msg = "File statistics must be non-negative."
             raise ValueError(msg)
