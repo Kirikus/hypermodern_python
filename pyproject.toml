@@ -37,6 +37,7 @@ tests = [
   "pytest-clarity>=1.0.1",
   "pytest-cov>=7.0.0",
   "pytest-mock>=3.15.1",
+  "pytest-mypy>=1.0.1",
   "pytest-randomly>=4.0.1",
   "pytest-sugar>=1.1.1",
   "pytest-xdist>=3.8.0",
@@ -123,7 +124,7 @@ exclude_patterns = [ "_build" ]
 
 [tool.poe.tasks]
 # === Core / Development tasks ===
-test = { cmd = "pytest --cov", help = "Run the test suite with coverage reporting" }
+test = { cmd = "pytest --cov --mypy", help = "Run the test suite with coverage reporting" }
 pywc = { cmd = "pywc", help = "Run the pywc command-line tool" }
 # === Individual code quality / formatting tasks ===
 ruff_format = { cmd = "ruff format", help = "Format Python code using Ruff" }
