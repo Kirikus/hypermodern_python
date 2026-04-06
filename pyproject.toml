@@ -21,6 +21,7 @@ dev = [
   "poethepoet>=0.43.0",
   "pyproject-fmt>=2.18.1",
   "ruff>=0.15.5",
+  "ty>=0.0.29",
   { include-group = "docs" },
   { include-group = "tests" },
 ]
@@ -129,6 +130,7 @@ ruff_format = { cmd = "ruff format", help = "Format Python code using Ruff" }
 ruff_lint = { cmd = "ruff check --fix", help = "Lint Python code with Ruff and fix fixable issues" }
 format_toml = { cmd = "pyproject-fmt pyproject.toml", help = "Format pyproject.toml" }
 pydoclint = { cmd = "pydoclint --style google src", help = "Check docstring style and completeness" }
+typecheck = { cmd = "ty check", help = "Check type annotations (static checking)" }
 # === Documentation generation ===
 doc = { sequence = [
   { cmd = "sphinx-apidoc -o docs/api --separate src/pywc" },
@@ -143,6 +145,7 @@ sequence = [
   { ref = "ruff_format" },
   { ref = "ruff_lint" },
   { ref = "pydoclint" },
+  { ref = "typecheck" },
 ]
 ignore_fail = "return_non_zero"
 [tool.poe.tasks.lint]
