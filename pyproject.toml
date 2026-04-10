@@ -30,6 +30,9 @@ docs = [
   "myst-parser>=5.0.0",
   "pydoclint>=0.8.3",
   "sphinx>=9.1.0",
+  "sphinx-autoapi>=3.8.0",
+  "sphinx-click>=6.2.0",
+  "sphinx-design>=0.7.0",
   "sphinx-pyproject>=0.3.0",
 ]
 tests = [
@@ -115,12 +118,25 @@ omit = [
 [tool.sphinx-pyproject]
 extensions = [
   "myst_parser",
+  "autoapi.extension",
+  "sphinx_click",
   "sphinx.ext.napoleon",
+  "sphinx.ext.autodoc", "sphinx_design"]
+myst_enable_extensions = ["colon_fence"]
+autoapi_dirs = [ "../src/pywc" ]
+autoapi_options = [
+  "members",
+  "special-members",
+  "show-inheritance",
+  "show-module-summary",
+  # "private-members",  # etc.
 ]
 html_theme = "furo"
 html_static_path = [ "_static" ]
 templates_path = [ "_templates" ]
 exclude_patterns = [ "_build" ]
+autodoc_typehints = "description"
+source_suffix = { ".rst" = "restructuredtext", ".md" = "markdown" }
 
 [tool.poe.tasks]
 # === Core / Development tasks ===
@@ -134,7 +150,8 @@ pydoclint = { cmd = "pydoclint --style google src", help = "Check docstring styl
 typecheck = { cmd = "ty check", help = "Check type annotations (static checking)" }
 # === Documentation generation ===
 doc = { sequence = [
-  { cmd = "sphinx-apidoc -o docs/api --separate src/pywc" },
+  # { cmd = "sphinx-apidoc -o docs/api --separate src/pywc" },
+  { cmd = "make clean", cwd = "docs" },
   { cmd = "make html", cwd = "docs" },
 ], help = "Generate API documentation with sphinx-apidoc and build the HTML docs" }
 

@@ -12,13 +12,13 @@ if TYPE_CHECKING:
 class CounterFlags:
     """Using to decide which arguments to report and current reading status.
 
-    Attributes:
-        lines (bool): If true, lines statistics are among the statistics used.
-        words (bool): If true, words statistics are among the statistics used.
-        chars (bool): If true, characters statistics are among the statistics used.
-        bytes (bool): If true, bytes statistics are among the statistics used.
-
     Args:
+        lines (bool, default=True): If true, lines statistics are among the statistics used.
+        words (bool, default=True): If true, words statistics are among the statistics used.
+        chars (bool, default=True): If true, characters statistics are among the statistics used.
+        bytes (bool, default=True): If true, bytes statistics are among the statistics used.
+
+    Attributes:
         lines (bool): If true, lines statistics are among the statistics used.
         words (bool): If true, words statistics are among the statistics used.
         chars (bool): If true, characters statistics are among the statistics used.
@@ -50,7 +50,7 @@ class FileStats:
     chars: int = 0
     bytes: int = 0
 
-    def __post_init__(self) -> None: # noqa: D105
+    def __post_init__(self) -> None:  # noqa: D105
         if self.lines < 0 or self.words < 0 or self.chars < 0 or self.bytes < 0:
             msg = "File statistics must be non-negative."
             raise ValueError(msg)
@@ -67,7 +67,7 @@ class FileStats:
         Returns:
             Self: new FileStats instance.
         """
-        return FileStats(
+        return type(self)(
             lines=self.lines + other.lines,
             words=self.words + other.words,
             chars=self.chars + other.chars,

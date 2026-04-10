@@ -11,7 +11,7 @@ from pywc.navigation import process_path
 
 
 @pytest.fixture
-def formatter_mock() -> FormatterT:
+def formatter_mock() -> MagicMock:
     """Stub for formatter calls, used to calculate calls to it."""
     return MagicMock(spec=FormatterT)
 
@@ -105,7 +105,7 @@ class TestProcessPath:
     def test_calls_formatter_for_each_file(
         self,
         tmp_path: Path,
-        formatter_mock: FormatterT,
+        formatter_mock: MagicMock,
     ) -> None:
         """Formatter is called once per processed file (not for directories)."""
         # Create a small directory with 2 files
@@ -118,7 +118,7 @@ class TestProcessPath:
 
         assert formatter_mock.call_count == 2  # noqa:PLR2004
 
-    def test_does_not_call_formatter_on_ignored_files(self, small_file: Path, formatter_mock: FormatterT) -> None:
+    def test_does_not_call_formatter_on_ignored_files(self, small_file: Path, formatter_mock: MagicMock) -> None:
         """Formatter is not called for files that match ignored_regexps."""
         process_path(
             small_file,

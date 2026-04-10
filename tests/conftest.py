@@ -7,11 +7,15 @@ import pytest
 
 from pywc.data import CounterFlags, FileStats
 
-PathFactoryT = Callable[[int, int, int, int, str | None], Path]
+PathFactoryT = Callable[[int, int, int, str | None], Path]
+CreateFileT = Callable[
+    [int, int, int, str | None],  # lines, words, chars, filename=None
+    Path,
+]
 
 
 @pytest.fixture
-def create_file(tmp_path: Path) -> Callable[[int, int, int, str | None], Path]:
+def create_file(tmp_path: Path) -> CreateFileT:
     """Factory that creates a temporary file with exact line/word/char counts.
 
     Assumes 1 byte/character.
@@ -57,7 +61,7 @@ def large_file_stats() -> FileStats:
 @pytest.fixture
 def large_file(create_file: PathFactoryT, large_file_stats: FileStats) -> Path:
     """Larger file with exact line/word/char counts."""
-    return create_file(large_file_stats.lines, large_file_stats.words, large_file_stats.chars, filename="large")
+    return create_file(large_file_stats.lines, large_file_stats.words, large_file_stats.chars, "large")
 
 
 @pytest.fixture
@@ -73,7 +77,7 @@ def small_file_stats() -> FileStats:
 @pytest.fixture
 def small_file(create_file: PathFactoryT, small_file_stats: FileStats) -> Path:
     """Smaller file with exact line/word/char counts."""
-    return create_file(small_file_stats.lines, small_file_stats.words, small_file_stats.chars, filename="small")
+    return create_file(small_file_stats.lines, small_file_stats.words, small_file_stats.chars, "small")
 
 
 @pytest.fixture

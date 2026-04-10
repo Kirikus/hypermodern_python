@@ -22,7 +22,13 @@ napoleon_use_ivar = False
 napoleon_use_param = False
 napoleon_use_rtype = False
 napoleon_attr_annotations = True
+napoleon_include_init_with_doc = False
 
+# Key setting for dataclasses
+autoapi_python_class_content = "both"     # ← Add this line
+
+# Optional but helpful
+autoapi_member_order = "bysource"         # Preserves field order from source
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

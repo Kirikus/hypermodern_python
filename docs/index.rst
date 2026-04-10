@@ -5,9 +5,10 @@ pywc
 
 .. toctree::
    :maxdepth: 2
+   :hidden:
    :caption: Contents:
 
-   api/modules
+   materials/index
 
 .. include:: ../README.md
    :parser: myst_parser.sphinx_

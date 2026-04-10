@@ -6,3 +6,4 @@ pywc.data module
    :show-inheritance:
    :undoc-members:
    :exclude-members: lines, words, chars, bytes
+   :noindex:

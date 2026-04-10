@@ -6,9 +6,10 @@ if TYPE_CHECKING:
     from collections.abc import Iterable
     from pathlib import Path
 
+    from pywc.data import CounterFlags
     from pywc.format import FormatterT
 
-from pywc.data import CounterFlags, FileStats
+from pywc.data import FileStats
 
 
 def process_path(

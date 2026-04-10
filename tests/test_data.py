@@ -17,7 +17,7 @@ class TestFileStats:
     def test_positional_constructor(self) -> None:
         """Allow only usage with 4 named arguments."""
         with pytest.raises(TypeError, match="takes 1 positional argument but 5 were given"):
-            FileStats(1, 2, 3, 4)
+            FileStats(1, 2, 3, 4)  # type: ignore  # noqa: PGH003
 
     def test_positive_constructor(self) -> None:
         """Allow only usage with positive values."""
@@ -64,11 +64,11 @@ class TestFileStats:
     def test_chunksize_spaces(self, create_file: Callable[[int, int, int, str | None], Path]) -> None:
         """Handle large files with space around chunk size (before or after)."""
         chunk_size = 2**16
-        res = FileStats.from_file(create_file(lines=0, words=chunk_size, chars=3 * chunk_size))
+        res = FileStats.from_file(create_file(0, chunk_size, 3 * chunk_size, None))
         assert res.lines == 0
         assert res.words == chunk_size
         assert res.chars == 3 * chunk_size
-        res = FileStats.from_file(create_file(lines=1, words=chunk_size, chars=3 * chunk_size))
+        res = FileStats.from_file(create_file(1, chunk_size, 3 * chunk_size, None))
         assert res.lines == 1
         assert res.words == chunk_size
         assert res.chars == 3 * chunk_size

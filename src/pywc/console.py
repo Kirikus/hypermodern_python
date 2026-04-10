@@ -2,12 +2,16 @@
 
 from importlib.metadata import version
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import click
 
 from pywc.data import CounterFlags, FileStats
 from pywc.format import format_automatic, formatter_wrapper_print
 from pywc.navigation import process_path
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
 
 
 @click.command()
@@ -43,15 +47,15 @@ from pywc.navigation import process_path
     type=click.Path(exists=True),
 )
 def main(  # noqa: PLR0913
-    paths: [Path],
+    paths: Iterable[Path],
     *,
     byte_count: bool,
     chars: bool,
     words: bool,
     lines: bool,
-    ignored_extensions: [str],
-    ignored_names: [str],
-    ignored_regexps: [str],
+    ignored_extensions: Iterable[str],
+    ignored_names: Iterable[str],
+    ignored_regexps: Iterable[str],
 ) -> None:
     """Python version of wc command with limited functionality.
 

@@ -50,6 +50,7 @@ def formatter_wrapper_print(formatter: FormatterT) -> FormatterT:
     Returns:
         FormatterT: decorated formatter wrapper that calls `print()` on result.
     """
+
     def wrapped(stats: FileStats, flags: CounterFlags, name: str | None = None) -> str:
         ret = formatter(stats, flags, name)
         print(ret)  # noqa: T201

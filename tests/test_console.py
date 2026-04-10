@@ -9,15 +9,14 @@ import pytest
 from click.testing import CliRunner
 
 from pywc.console import main
-from pywc.format import FormatterT
-from pywc.navigation import process_path
 
 if TYPE_CHECKING:
+    from collections.abc import Iterable, Sequence
     from unittest.mock import Mock
 
     from pytest_mock import MockerFixture
 
-    from pywc.data import CounterFlags, FileStats
+    from pywc.data import FileStats
 
 
 @pytest.fixture
@@ -32,17 +31,17 @@ def mock_formatter(mocker: MockerFixture) -> Mock:
 
     Returns wrapped function mock instead of decorator.
     """
-    m = mocker.patch("pywc.console.formatter_wrapper_print")
-    m.return_value = mocker.Mock(spec=FormatterT)
-    return m.return_value
+    outer_mock = mocker.patch("pywc.console.formatter_wrapper_print")
+    outer_mock.return_value = mocker.Mock()
+    return outer_mock.return_value
 
 
 @pytest.fixture
 def mock_process_path(mocker: MockerFixture, small_file_stats: FileStats) -> Mock:
     """Mocking side effects of main function, process_path function."""
-    m = mocker.patch("pywc.console.process_path")
-    m.return_value = small_file_stats
-    return m
+    mock = mocker.patch("pywc.console.process_path")
+    mock.return_value = small_file_stats
+    return mock
 
 
 @pytest.fixture
@@ -53,7 +52,9 @@ def mock_flags(mocker: MockerFixture) -> Mock:
 
 @pytest.fixture
 def mocked(
-    mock_formatter: FormatterT, mock_process_path: type(process_path), mock_flags: CounterFlags
+    mock_flags: Mock,
+    mock_formatter: Mock,
+    mock_process_path: Mock,
 ) -> SimpleNamespace:
     """Namespace object containing all the mocks for convenient access in tests."""
     return SimpleNamespace(mock_flags=mock_flags, mock_process_path=mock_process_path, mock_formatter=mock_formatter)
@@ -93,7 +94,7 @@ class TestConsole:
         ],
     )
     def test_individual_flag_sets_corresponding_counterflag(
-        self, runner: CliRunner, flag_arg: [str], expected_flag: str, mocked: SimpleNamespace
+        self, runner: CliRunner, flag_arg: Sequence[str], expected_flag: str, mocked: SimpleNamespace
     ) -> None:
         """Check long and short form of all flags."""
         runner.invoke(main, flag_arg)
@@ -126,8 +127,7 @@ class TestConsole:
         self, runner: CliRunner, mocked: SimpleNamespace, small_file: Path, mocker: MockerFixture
     ) -> None:
         """There is no protection from duplicates, so we can just call main on the same file twice."""
-        paths = [small_file, small_file]
-        paths = list(map(str, paths))
+        paths = [str(p) for p in [small_file, small_file]]
         runner.invoke(main, paths)
         assert mocked.mock_process_path.call_count == len(paths)
         expected_calls = [mocker.call(Path(p), mocker.ANY, ignored_regexps=[], formatter=mocker.ANY) for p in paths]
@@ -165,8 +165,8 @@ class TestConsole:
     def test_ignored_arguments_are_passed_to_process_path_as_regexps(
         self,
         runner: CliRunner,
-        ignored_args: [str],
-        expected_regexps: [str],
+        ignored_args: Iterable[str],
+        expected_regexps: Iterable[str],
         mocked: SimpleNamespace,
         small_file: Path,
     ) -> None:
