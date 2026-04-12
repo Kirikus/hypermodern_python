@@ -13,14 +13,19 @@ classifiers = [
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.14",
 ]
-dependencies = []
+dependencies = [
+  "click>=8.3.1",
+]
 scripts.pywc = "pywc.console:main"
 
 [dependency-groups]
 dev = [
+  "mdformat>=1.0.0",
   "poethepoet>=0.43.0",
   "pyproject-fmt>=2.18.1",
+  "rstfmt>=0.0.14",
   "ruff>=0.15.5",
+  "scour>=0.38.2",
   "ty>=0.0.29",
   { include-group = "docs" },
   { include-group = "tests" },
@@ -29,11 +34,11 @@ docs = [
   "furo>=2025.12.19",
   "myst-parser>=5.0.0",
   "pydoclint>=0.8.3",
-  "sphinx>=9.1.0",
   "sphinx-autoapi>=3.8.0",
   "sphinx-click>=6.2.0",
   "sphinx-design>=0.7.0",
   "sphinx-pyproject>=0.3.0",
+  "sphinxcontrib-mermaid>=2.0.1",
 ]
 tests = [
   "pytest>=9.0.2",
@@ -121,8 +126,12 @@ extensions = [
   "autoapi.extension",
   "sphinx_click",
   "sphinx.ext.napoleon",
-  "sphinx.ext.autodoc", "sphinx_design"]
-myst_enable_extensions = ["colon_fence"]
+  "sphinx.ext.autodoc",
+  "sphinx.ext.todo",
+  "sphinx_design",
+  "sphinxcontrib.mermaid",
+]
+myst_enable_extensions = [ "colon_fence" ]
 autoapi_dirs = [ "../src/pywc" ]
 autoapi_options = [
   "members",
@@ -133,14 +142,16 @@ autoapi_options = [
 ]
 html_theme = "furo"
 html_static_path = [ "_static" ]
+html_css_files = [ "custom.css" ]
 templates_path = [ "_templates" ]
 exclude_patterns = [ "_build" ]
 autodoc_typehints = "description"
+autoapi_template_dir = "_templates"
 source_suffix = { ".rst" = "restructuredtext", ".md" = "markdown" }
 
 [tool.poe.tasks]
 # === Core / Development tasks ===
-test = { cmd = "pytest --cov --mypy", help = "Run the test suite with coverage reporting" }
+test = { cmd = "pytest --cov", help = "Run the test suite with coverage reporting" }
 pywc = { cmd = "pywc", help = "Run the pywc command-line tool" }
 # === Individual code quality / formatting tasks ===
 ruff_format = { cmd = "ruff format", help = "Format Python code using Ruff" }
@@ -148,28 +159,43 @@ ruff_lint = { cmd = "ruff check --fix", help = "Lint Python code with Ruff and f
 format_toml = { cmd = "pyproject-fmt pyproject.toml", help = "Format pyproject.toml" }
 pydoclint = { cmd = "pydoclint --style google src", help = "Check docstring style and completeness" }
 typecheck = { cmd = "ty check", help = "Check type annotations (static checking)" }
+scour_svg = { cmd = "python ./utils/scour-cli.py ./docs/_static/img/logo/*.svg", help = "Optimize SVG file(s) in-place with Scour" }
+mdformat = { cmd = "mdformat ./docs/*.md ./docs/*/*.md", help = "Format .md files in documentation" }
+rstfmt = { cmd = " rstfmt --ext rst .", help = "Format .rst files in documentation" }
 # === Documentation generation ===
 doc = { sequence = [
   # { cmd = "sphinx-apidoc -o docs/api --separate src/pywc" },
   { cmd = "make clean", cwd = "docs" },
   { cmd = "make html", cwd = "docs" },
 ], help = "Generate API documentation with sphinx-apidoc and build the HTML docs" }
+[tool.poe.tasks.doc_host]
+help = "Generate and host documentation on localhost"
+sequence = [
+  { ref = "doc" },
+  { cmd = "python -m http.server ${port}", cwd = "docs/_build/html" },
+]
+[[tool.poe.tasks.doc_host.args]]
+name = "port"
+help = "localhost port which will host the documentation"
+positional = true
+type = "integer"
 
 # === Composite tasks ===
 [tool.poe.tasks.format]
 help = "Run the full formatting and style pipeline (TOML + Ruff format + Ruff lint + docstring check)"
 sequence = [
   { ref = "format_toml", ignore_fail = true },  # Format-toml returns false if it changes file
+  { ref = "mdformat" },
+  { ref = "scour_svg" },
   { ref = "ruff_format" },
-  { ref = "ruff_lint" },
-  { ref = "pydoclint" },
-  { ref = "typecheck" },
 ]
 ignore_fail = "return_non_zero"
 [tool.poe.tasks.lint]
-help = "Run linting only (Ruff + pydoclint)"
+help = "Run linting (Ruff + pydoclint + typecheck) and formatting"
 sequence = [
+  { ref = "format" },
   { ref = "ruff_lint" },
   { ref = "pydoclint" },
+  { ref = "typecheck" },
 ]
 ignore_fail = "return_non_zero"

@@ -8,7 +8,7 @@ Writing documentation helps users understand your code, reduces support requests
 
 Even in solo projects it pays off: it serves as a reference for your future self, speeds up onboarding if the project grows, and makes refactoring safer because intent is recorded. Even small projects can receive sudden continuation several years later.
 
-Furthermore, documentation can be used by programs such as IDEs, linters and similar tools, or even AI-agents. Once docstrings are written, creating documentation is trivial. 
+Furthermore, documentation can be used by programs such as IDEs, linters and similar tools, or even AI-agents. Once docstrings are written, creating documentation is trivial.
 
 ## Main principles of good documentation
 
@@ -37,8 +37,9 @@ With the [sphinx-pyproject](https://sphinx-pyproject.readthedocs.io/en/latest/) 
 - Sphinx-specific settings go under `[tool.sphinx-pyproject]`.
 
 You can either:
- - Keep a minimal `conf.py` that only contains Python code loading data from `pyproject.toml`.
- - Keep most settings in `conf.py` and access `pyproject.toml` only to load data from `[project]` section  (this avoids duplication).
+
+- Keep a minimal `conf.py` that only contains Python code loading data from `pyproject.toml`.
+- Keep most settings in `conf.py` and access `pyproject.toml` only to load data from `[project]` section (this avoids duplication).
 
 ## Markup formats: Markdown, reStructuredText and MyST
 
@@ -48,11 +49,11 @@ You can either:
 
 **When to choose each**:
 
-- Use plain Markdown + MkDocs for small or quick-start projects. There is a reason use see ``README.md`` everywhere!
+- Use plain Markdown + MkDocs for small or quick-start projects. There is a reason use see `README.md` everywhere!
 - Use reStructuredText for maximum control in large Sphinx sites. Or, actually, don't because...
-- Use MyST when you like Markdown syntax but still want full Sphinx power. 
+- Use MyST when you like Markdown syntax but still want full Sphinx power.
 
-Here is the same simple document written in each format (tabs are synchronised via the ``sphinx-design`` extension; selecting a tab in one place will keep others in sync if you reuse the same ``sync`` keys elsewhere):
+Here is the same simple document written in each format (tabs are synchronised via the `sphinx-design` extension; selecting a tab in one place will keep others in sync if you reuse the same `sync` keys elsewhere):
 
 ::::{tab-set}
 :sync-group: markup-example
@@ -81,7 +82,7 @@ This function does something useful.
 :::{tab-item} md
 **Markdown (MkDocs)**
 
-~~~markdown
+````markdown
 # Example function
 
 This function does something useful.
@@ -94,14 +95,14 @@ def my_function():
     """Does something useful."""
     pass
 ```
-~~~
+````
 
 :::
 
 :::{tab-item} MyST
 **MyST Markdown (Sphinx)**
 
-~~~markdown
+````markdown
 # Example function
 
 This function does something useful.
@@ -114,7 +115,7 @@ def my_function():
     """Does something useful."""
     pass
 ```
-~~~
+````
 
 :::
 
@@ -124,8 +125,8 @@ def my_function():
 
 This function does something useful.
 
-* Point one
-* Point two
+- Point one
+- Point two
 
 ```python
 def my_function():
@@ -147,36 +148,42 @@ Format of using directives may wary, as well as the specifics of customizing the
 :sync-group: markup-example
 
 ::::{tab-item} rst
+
 ```rst
 .. directive-name:: optional argument
    :option: value
 
    Content goes here.
 ```
+
 ::::
 
 ::::{tab-item} MyST (backtick fence)
-~~~markdown
+
+````markdown
 ```{directive-name} optional argument
 :option: value
 
 Content goes here.
 ```
-~~~
+````
+
 ::::
 
 ::::{tab-item} MyST (colon fence)
-~~~markdown
+
+```markdown
 :::{directive-name} optional argument
 :option: value
 
 Content goes here.
 :::
-~~~
+```
 
 ::::
 
 ::::{tab-item} MyST (tilde fence)
+
 ```markdown
 ~~~{directive-name} optional argument
 :option: value
@@ -184,6 +191,7 @@ Content goes here.
 Content goes here.
 ~~~
 ```
+
 ::::
 :::::
 
@@ -211,7 +219,7 @@ Basic usage example:
    usage
 ```
 
-This creates links between current page and `intro`, `installation` and `usage` (these pages become children of current page). Note that for other pages copying this information is not necessary, as the whole table of contents tree will be constructed using directive from all pages.   
+This creates links between current page and `intro`, `installation` and `usage` (these pages become children of current page). Note that for other pages copying this information is not necessary, as the whole table of contents tree will be constructed using directive from all pages.
 
 ## Automatic documentation from docstrings
 
@@ -246,6 +254,7 @@ Full list and options: [Sphinx autodoc extension](https://www.sphinx-doc.org/en/
 For modern projects, [sphinx-autoapi](https://sphinx-autoapi.readthedocs.io/) is often the best choice. It parses your source code directly and generates clean, consistent API documentation.
 
 Advantages:
+
 - Works without executing your code
 - Handles complex projects and circular imports better
 - Produces more predictable output
@@ -259,12 +268,11 @@ Add it to your Sphinx extensions and configure the directories to scan.
 - [sphinx-apidoc](https://www.sphinx-doc.org/en/master/man/sphinx-apidoc.html) (command-line tool) — generates .rst stub files from your package. Useful for one-time generation but requires manual maintenance.
 - [pdoc](https://pdoc.dev/docs/pdoc.html) or [mkdocstrings](https://mkdocstrings.github.io/) — alternatives if you prefer MkDocs instead of Sphinx.
 
-| Tool              | Import required | Handles complex projects | Output style     | Best for                  |
+| Tool | Import required | Handles complex projects | Output style | Best for |
 |-------------------|-----------------|---------------------------|------------------|---------------------------|
-| sphinx-autoapi    | No              | Excellent                 | Clean & modern   | Most new Sphinx projects  |
-| autodoc           | Yes             | Good                      | Flexible         | Simple packages           |
-| autosummary       | Yes             | Good                      | Highly customisable | Projects needing summaries |
-| sphinx-apidoc     | No (scans files)| Moderate                  | Basic stubs      | Quick initial setup       |
+| sphinx-autoapi | No | Excellent | Clean & modern | Most new Sphinx projects |
+| autodoc | Yes | Good | Flexible | Simple packages |
+| autosummary | Yes | Good | Highly customisable | Projects needing summaries |
+| sphinx-apidoc | No (scans files)| Moderate | Basic stubs | Quick initial setup |
 
 Start with **sphinx-autoapi** unless you have a specific reason to use the built-in autodoc.
-

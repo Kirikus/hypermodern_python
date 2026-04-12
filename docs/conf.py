@@ -24,6 +24,9 @@ napoleon_use_rtype = False
 napoleon_attr_annotations = True
 napoleon_include_init_with_doc = False
 
+mermaid_init_config = {'startOnLoad': 'true', 'securityLevel': 'loose'}
+mermaid_params = ['-p', 'puppeteer-config.json']
+
 # Key setting for dataclasses
 autoapi_python_class_content = "both"     # ← Add this line
 

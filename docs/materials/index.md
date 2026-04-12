@@ -8,7 +8,10 @@ tests
 logger
 cli
 sphinx
+ty
 poe
 profiling
 performance
+pypi
+cicd
 ```

@@ -3,6 +3,7 @@
 “A short story must have a single mood and every sentence must build towards it.”
 
 ## Basic scripts definition in `[project.scripts]`
+
 The `[project.scripts]` section in `pyproject.toml` allows definition of command-line entry points. These become executable commands once the project is installed.
 
 - It turns Python functions into CLI tools that anyone can run after installing your package.
@@ -52,32 +53,37 @@ Tools like `nox` or `tox` can achieve similar multi-environment testing, but `po
 Poe supports two main categories: **execution tasks** (run something directly) and **orchestration tasks** (combine other tasks).
 
 ### Execution tasks
+
 These run content in a subprocess.
 
-- **cmd** (default for simple strings): A command executed without a shell.  
+- **cmd** (default for simple strings): A command executed without a shell.\
   Example:
+
   ```toml
   [tool.poe.tasks]
   lint = "ruff check ."
   ```
 
-- **script**: Calls a Python function (with optional arguments).  
+- **script**: Calls a Python function (with optional arguments).\
   Example:
+
   ```toml
   [tool.poe.tasks]
   migrate.script = "my_app.db:migrate"
   ```
 
-- **shell**: Runs a shell script (uses `bash` or similar on POSIX).  
+- **shell**: Runs a shell script (uses `bash` or similar on POSIX).\
   Useful for complex pipelines or environment-dependent commands.
 
 - **expr**: Evaluates a Python expression and prints the result.
 
 ### Orchestration tasks
+
 These control the flow of other tasks.
 
-- **sequence**: Runs tasks one after another (in order).  
+- **sequence**: Runs tasks one after another (in order).\
   Example:
+
   ```toml
   [tool.poe.tasks]
   check = ["lint", "test"]

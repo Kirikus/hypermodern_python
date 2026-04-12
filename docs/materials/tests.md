@@ -1,4 +1,4 @@
-# pytest: Testing in Python 
+# pytest: Testing in Python
 
 Code without tests is a liability disguised as an asset.
 
@@ -28,16 +28,15 @@ Choose names that clearly describe the scenario and expected outcome. Good names
 
 Examples:
 
-- ``test_empty_input_raises_value_error``
-- ``test_valid_user_data_creates_profile_successfully``
-- ``test_expired_token_rejected_with_401``
+- `test_empty_input_raises_value_error`
+- `test_valid_user_data_creates_profile_successfully`
+- `test_expired_token_rejected_with_401`
 
 ### Test organization
 
-- Place tests in a dedicated ``tests/`` directory
+- Place tests in a dedicated `tests/` directory
 - Mirror the structure of the source code when appropriate
 - Group related tests logically within files and subdirectories
-
 
 ## Why pytest?
 
@@ -51,13 +50,14 @@ For code dealing with complex input domains (especially algorithms or mathematic
 
 pytest automatically discovers and runs tests with almost no configuration, as long as certain conventions are being followed:
 
-- Test files must be named ``test_*.py`` or ``*_test.py``
-- Test functions must start with ``test_``
-- Test classes must start with ``Test`` and contain methods starting with ``test_``
+- Test files must be named `test_*.py` or `*_test.py`
+- Test functions must start with `test_`
+- Test classes must start with `Test` and contain methods starting with `test_`
 
-Tests are written using ordinary ``assert`` statements. ``pytest`` enhances these assertions with readable failure messages.
+Tests are written using ordinary `assert` statements. `pytest` enhances these assertions with readable failure messages.
 
 Run all with:
+
 ```bash
    uv run pytest
 ```
@@ -102,18 +102,17 @@ def test_eval(test_input, expected):
     assert eval(test_input) == expected
 ```
 
-Without it, code duplication would occur, leading to the same issues as described above. 
-
+Without it, code duplication would occur, leading to the same issues as described above.
 
 ### Marks
 
-[Marks](https://docs.pytest.org/en/stable/how-to/mark.html) let you tag tests for skipping, expected failures, or selective execution (for example, not running tests with ``@pytest.mark.slow`).
+[Marks](https://docs.pytest.org/en/stable/how-to/mark.html) let you tag tests for skipping, expected failures, or selective execution (for example, not running tests with \`\`@pytest.mark.slow\`).
 
-Not very useful if you are just starting to write tests, you can get by without using them. 
+Not very useful if you are just starting to write tests, you can get by without using them.
 
 ### Mocking
 
-If code depends on external systems — databases, APIs, file systems, or third-party services - [mocking](https://docs.pytest.org/en/stable/how-to/monkeypatch.html) is used. 
+If code depends on external systems — databases, APIs, file systems, or third-party services - [mocking](https://docs.pytest.org/en/stable/how-to/monkeypatch.html) is used.
 
 Directly using those systems creates several problems:
 
@@ -122,7 +121,7 @@ Directly using those systems creates several problems:
 - Tests require too complex setup or credentials
 - You cannot easily test edge cases or error conditions
 - Running tests modifies real data or incurs costs
-- Failure in a single base class leads to errors across all tests even loosely related to that class. 
+- Failure in a single base class leads to errors across all tests even loosely related to that class.
 
 **Mocking** solves this by replacing real objects or functions with fake ("mock") versions that simulate the behavior you need.
 
@@ -130,10 +129,10 @@ Directly using those systems creates several problems:
 
 There are [a lot of plugins](https://docs.pytest.org/en/stable/reference/plugin_list.html), but here is a brief list of suggested ones:
 
-- ``pytest-cov`` measures code coverage.
-- ``pytest-xdist`` runs tests in parallel.
-- ``pytest-sugar`` and ``pytest-clarity`` improve console output.
-- ``pytest-randomly`` runs tests in random order.
+- `pytest-cov` measures code coverage.
+- `pytest-xdist` runs tests in parallel.
+- `pytest-sugar` and `pytest-clarity` improve console output.
+- `pytest-randomly` runs tests in random order.
 
 ## Further Reading
 

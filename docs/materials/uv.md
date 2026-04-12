@@ -14,7 +14,7 @@ A **project manager** goes further: it helps manage an entire Python project by 
 - Reproducible installs via lockfiles
 - Running scripts or commands in the project's isolated environment
 
-Modern project managers (like uv, Poetry, or Hatch) typically use a ``pyproject.toml`` file as the central configuration and generate a lockfile (e.g., ``uv.lock``) for exact, reproducible dependency versions.
+Modern project managers (like uv, Poetry, or Hatch) typically use a `pyproject.toml` file as the central configuration and generate a lockfile (e.g., `uv.lock`) for exact, reproducible dependency versions.
 
 ## Why use uv over pip
 
@@ -26,11 +26,11 @@ Key advantages of uv over plain pip include:
 
 - **Blazing speed**: uv is often 10–100× faster than pip for installations and dependency resolution thanks to its Rust implementation and smart caching.
 - **All-in-one tool**: It manages Python interpreters, virtual environments, projects, and scripts without needing separate tools.
-- **Better project workflow**: Uses ``pyproject.toml`` + lockfile for reproducible environments, automatic syncing, and clean dependency management.
+- **Better project workflow**: Uses `pyproject.toml` + lockfile for reproducible environments, automatic syncing, and clean dependency management.
 - **Efficient caching**: Global cache reduces disk usage and avoids re-downloading the same packages repeatedly.
 - **No pre-installed Python required**: uv can download and manage Python versions itself (see below).
 
-For simple one-off scripts, ``pip`` is still fine. For anything resembling a real project or when speed and reproducibility matter, uv provides a much smoother and faster experience.
+For simple one-off scripts, `pip` is still fine. For anything resembling a real project or when speed and reproducibility matter, uv provides a much smoother and faster experience.
 
 ## How to set up a Python interpreter using uv
 
@@ -42,11 +42,11 @@ To get started with uv, follow the official installation instructions:
 
 Once uv is installed, you can:
 
-- List available Python versions: ``uv python list``
-- Install a specific Python version (e.g., 3.12): ``uv python install 3.12``
+- List available Python versions: `uv python list`
+- Install a specific Python version (e.g., 3.12): `uv python install 3.12`
 - Set a default Python version for your projects
 
-For a new project, uv will automatically detect or install the required Python version specified in ``pyproject.toml`` (via the ``requires-python`` field or a ``.python-version`` file).
+For a new project, uv will automatically detect or install the required Python version specified in `pyproject.toml` (via the `requires-python` field or a `.python-version` file).
 
 See the official guide for more details:
 
@@ -61,7 +61,7 @@ uv init myproject
 cd myproject
 ```
 
-This creates a ``pyproject.toml`` file and sets up the basic project structure.
+This creates a `pyproject.toml` file and sets up the basic project structure.
 
 ### Adding and removing dependencies
 
@@ -83,7 +83,7 @@ This creates a ``pyproject.toml`` file and sets up the basic project structure.
      uv remove requests
 ```
 
-These commands update ``pyproject.toml`` and the ``uv.lock`` lockfile automatically.
+These commands update `pyproject.toml` and the `uv.lock` lockfile automatically.
 
 ### Syncing the environment
 
@@ -93,11 +93,11 @@ To install or update the project's dependencies into the virtual environment:
    uv sync
 ```
 
-``uv sync`` creates/updates the virtual environment and installs exactly the packages listed in the lockfile (exact mode by default, removing extraneous packages).
+`uv sync` creates/updates the virtual environment and installs exactly the packages listed in the lockfile (exact mode by default, removing extraneous packages).
 
 ### Running commands or scripts
 
-Use ``uv run`` to execute commands or scripts inside the project's managed virtual environment:
+Use `uv run` to execute commands or scripts inside the project's managed virtual environment:
 
 ```console
    uv run python script.py          # Run a script
@@ -105,7 +105,7 @@ Use ``uv run`` to execute commands or scripts inside the project's managed virtu
    uv run ruff check .              # Run a linter
 ```
 
-``uv run`` automatically ensures the environment is synced before running the command.
+`uv run` automatically ensures the environment is synced before running the command.
 
 For more advanced usage, explore the full documentation:
 
