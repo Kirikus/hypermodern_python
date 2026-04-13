@@ -21,7 +21,11 @@ scripts.pywc = "pywc.console:main"
 [dependency-groups]
 dev = [
   "mdformat>=1.0.0",
+  "mdformat-black>=0.1.1",
+  "mdformat-myst>=0.3.0",
+  "mdformat-web>=0.2.0",
   "poethepoet>=0.43.0",
+  "pre-commit>=4.5.1",
   "pyproject-fmt>=2.18.1",
   "rstfmt>=0.0.14",
   "ruff>=0.15.5",
@@ -154,24 +158,47 @@ source_suffix = { ".rst" = "restructuredtext", ".md" = "markdown" }
 test = { cmd = "pytest --cov", help = "Run the test suite with coverage reporting" }
 pywc = { cmd = "pywc", help = "Run the pywc command-line tool" }
 # === Individual code quality / formatting tasks ===
-ruff_format = { cmd = "ruff format", help = "Format Python code using Ruff" }
-ruff_lint = { cmd = "ruff check --fix", help = "Lint Python code with Ruff and fix fixable issues" }
+format_py = { cmd = "ruff format", help = "Format Python code using Ruff" }
+lint_py = { cmd = "ruff check --fix", help = "Lint Python code with Ruff and fix fixable issues" }
+check_py = { sequence = [
+  { cmd = "ruff format --check", help = "Check that Python code is formatted" },
+  { cmd = "ruff check", help = "Check that Python code is formatted" },
+] }
 format_toml = { cmd = "pyproject-fmt pyproject.toml", help = "Format pyproject.toml" }
-pydoclint = { cmd = "pydoclint --style google src", help = "Check docstring style and completeness" }
+check_toml = { cmd = "pyproject-fmt pyproject.toml --check", help = "Check that pyproject.toml is formatted" }
+optimize_svg = { cmd = "python ./utils/scour-cli.py ./docs/_static/img/logo/*.svg", help = "Optimize SVG file(s) in-place with Scour" }
+# TODO: add format_svg and check_svg
+format_md = { cmd = "mdformat ./docs/*.md ./docs/*/*.md", help = "Format .md files in documentation" }
+check_md = { cmd = "mdformat --check ./docs/*.md ./docs/*/*.md", help = "Check that .md files in documentation are formatted" }
 typecheck = { cmd = "ty check", help = "Check type annotations (static checking)" }
-scour_svg = { cmd = "python ./utils/scour-cli.py ./docs/_static/img/logo/*.svg", help = "Optimize SVG file(s) in-place with Scour" }
-mdformat = { cmd = "mdformat ./docs/*.md ./docs/*/*.md", help = "Format .md files in documentation" }
-rstfmt = { cmd = " rstfmt --ext rst .", help = "Format .rst files in documentation" }
+lint_doc = { cmd = "pydoclint --style google src", help = "Check docstring style and completeness" }
+format_rst = { cmd = "rstfmt --ext rst .", help = "Format .rst files in documentation" }
+check_rst = { cmd = "rstfmt --check --ext rst .", help = "Check that .rst files in documentation are formattedare formatted" }
 # === Documentation generation ===
-doc = { sequence = [
-  # { cmd = "sphinx-apidoc -o docs/api --separate src/pywc" },
+build_doc = { sequence = [
   { cmd = "make clean", cwd = "docs" },
   { cmd = "make html", cwd = "docs" },
 ], help = "Generate API documentation with sphinx-apidoc and build the HTML docs" }
+
+# === CI/CD task ===
+[tool.poe.tasks.ci]
+help = "Run the full CI pipeline: formatting/linting checks + typecheck + docstring check + tests + docs build"
+sequence = [
+  { parallel = [
+    { ref = "check_py" },
+    { ref = "check_toml" },
+    { ref = "check_md" },
+    { ref = "check_rst" },
+    { ref = "lint_doc" },
+    { ref = "typecheck" },
+    { ref = "test" },
+    { ref = "build_doc" },
+  ] },
+]
 [tool.poe.tasks.doc_host]
 help = "Generate and host documentation on localhost"
 sequence = [
-  { ref = "doc" },
+  { ref = "build_doc" },
   { cmd = "python -m http.server ${port}", cwd = "docs/_build/html" },
 ]
 [[tool.poe.tasks.doc_host.args]]
@@ -182,20 +209,19 @@ type = "integer"
 
 # === Composite tasks ===
 [tool.poe.tasks.format]
-help = "Run the full formatting and style pipeline (TOML + Ruff format + Ruff lint + docstring check)"
+help = "Run the full formatting pipeline (TOML + Markdown + RST + SVG + Ruff format)"
 sequence = [
-  { ref = "format_toml", ignore_fail = true },  # Format-toml returns false if it changes file
-  { ref = "mdformat" },
-  { ref = "scour_svg" },
-  { ref = "ruff_format" },
+  { ref = "format_toml", ignore_fail = true },  # Returns non-zero when it makes changes
+  { ref = "format_md" },
+  { ref = "format_rst" },
+  { ref = "optimize_svg" },
+  { ref = "format_py" },
 ]
-ignore_fail = "return_non_zero"
 [tool.poe.tasks.lint]
-help = "Run linting (Ruff + pydoclint + typecheck) and formatting"
+help = "Run all linting, type checking, and docstring validation (after formatting)"
 sequence = [
   { ref = "format" },
-  { ref = "ruff_lint" },
-  { ref = "pydoclint" },
+  { ref = "lint_py" },
+  { ref = "lint_doc" },
   { ref = "typecheck" },
 ]
-ignore_fail = "return_non_zero"

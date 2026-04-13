@@ -55,10 +55,11 @@ You can either:
 
 Here is the same simple document written in each format (tabs are synchronised via the `sphinx-design` extension; selecting a tab in one place will keep others in sync if you reuse the same `sync` keys elsewhere):
 
-::::{tab-set}
-:sync-group: markup-example
-
-:::{tab-item} rst
+``````{tab-set}
+---
+sync-group: markup-example
+---
+`````{tab-item} rst
 **reStructuredText**
 
 ```rst
@@ -77,9 +78,9 @@ This function does something useful.
        pass
 ```
 
-:::
+`````
 
-:::{tab-item} md
+`````{tab-item} md
 **Markdown (MkDocs)**
 
 ````markdown
@@ -97,9 +98,9 @@ def my_function():
 ```
 ````
 
-:::
+`````
 
-:::{tab-item} MyST
+`````{tab-item} MyST
 **MyST Markdown (Sphinx)**
 
 ````markdown
@@ -117,9 +118,9 @@ def my_function():
 ```
 ````
 
-:::
+`````
 
-:::{tab-item} View result
+`````{tab-item} View result
 
 # Example function
 
@@ -134,9 +135,9 @@ def my_function():
     pass
 ```
 
-:::
+`````
 
-::::
+``````
 
 ## Directives
 
@@ -144,10 +145,11 @@ Directives are reStructuredText (and MyST) blocks that add special behaviour suc
 
 Format of using directives may wary, as well as the specifics of customizing them. Consult manuals or examples when using them. Here are the most common examples of directive formats:
 
-:::::{tab-set}
-:sync-group: markup-example
-
-::::{tab-item} rst
+``````{tab-set}
+---
+sync-group: markup-example
+---
+`````{tab-item} rst
 
 ```rst
 .. directive-name:: optional argument
@@ -156,9 +158,9 @@ Format of using directives may wary, as well as the specifics of customizing the
    Content goes here.
 ```
 
-::::
+`````
 
-::::{tab-item} MyST (backtick fence)
+`````{tab-item} MyST (backtick fence)
 
 ````markdown
 ```{directive-name} optional argument
@@ -168,9 +170,9 @@ Content goes here.
 ```
 ````
 
-::::
+`````
 
-::::{tab-item} MyST (colon fence)
+`````{tab-item} MyST (colon fence)
 
 ```markdown
 :::{directive-name} optional argument
@@ -180,9 +182,9 @@ Content goes here.
 :::
 ```
 
-::::
+`````
 
-::::{tab-item} MyST (tilde fence)
+`````{tab-item} MyST (tilde fence)
 
 ```markdown
 ~~~{directive-name} optional argument
@@ -192,8 +194,8 @@ Content goes here.
 ~~~
 ```
 
-::::
-:::::
+`````
+``````
 
 Common examples of directives are: `note`, `warning`, `code-block`, `image`, `toctree`, `todo`.
 
@@ -268,11 +270,11 @@ Add it to your Sphinx extensions and configure the directories to scan.
 - [sphinx-apidoc](https://www.sphinx-doc.org/en/master/man/sphinx-apidoc.html) (command-line tool) — generates .rst stub files from your package. Useful for one-time generation but requires manual maintenance.
 - [pdoc](https://pdoc.dev/docs/pdoc.html) or [mkdocstrings](https://mkdocstrings.github.io/) — alternatives if you prefer MkDocs instead of Sphinx.
 
-| Tool | Import required | Handles complex projects | Output style | Best for |
-|-------------------|-----------------|---------------------------|------------------|---------------------------|
-| sphinx-autoapi | No | Excellent | Clean & modern | Most new Sphinx projects |
-| autodoc | Yes | Good | Flexible | Simple packages |
-| autosummary | Yes | Good | Highly customisable | Projects needing summaries |
-| sphinx-apidoc | No (scans files)| Moderate | Basic stubs | Quick initial setup |
+| Tool           | Import required  | Handles complex projects | Output style        | Best for                   |
+| -------------- | ---------------- | ------------------------ | ------------------- | -------------------------- |
+| sphinx-autoapi | No               | Excellent                | Clean & modern      | Most new Sphinx projects   |
+| autodoc        | Yes              | Good                     | Flexible            | Simple packages            |
+| autosummary    | Yes              | Good                     | Highly customisable | Projects needing summaries |
+| sphinx-apidoc  | No (scans files) | Moderate                 | Basic stubs         | Quick initial setup        |
 
 Start with **sphinx-autoapi** unless you have a specific reason to use the built-in autodoc.

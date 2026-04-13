@@ -1,5 +1,7 @@
 ````{div}
-:name: description
+---
+name: description
+---
 ```{image} ../../_static/img/logo/sphinx_plus.svg?raw=true
 :align: left
 :class: img-bg-fill

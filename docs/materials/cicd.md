@@ -1,5 +1,5 @@
 # TODO: CI/CD
 
-:::{todo}
+```{todo}
 Write later.
-:::
+```

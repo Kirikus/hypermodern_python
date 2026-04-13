@@ -80,16 +80,16 @@ Manually repeating setup code (creating objects, connecting to databases, prepar
 ```python
 @pytest.fixture
 def user():
-   """Return a test user object."""
-   return {"id": 42, "name": "Alice", "email": "alice@example.com"}
+    """Return a test user object."""
+    return {"id": 42, "name": "Alice", "email": "alice@example.com"}
 ```
 
 To use a fixture, simply pass its name as an argument to the test function:
 
 ```python
 def test_user_has_name(user):
-   assert user["name"] == "Alice"
-   assert "email" in user
+    assert user["name"] == "Alice"
+    assert "email" in user
 ```
 
 ### Parametrization

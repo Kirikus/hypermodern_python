@@ -7,9 +7,7 @@
 </div>
 
 ```{mermaid}
----
-config: {"themeVariables": {"fontSize": "40px"}}
----
+%%{init: {"themeVariables": {"fontSize": "40px"}}}%%
     flowchart TD
     subgraph Tier1 [Grades 3-]
         subgraph T1 [" "]
@@ -18,17 +16,17 @@ config: {"themeVariables": {"fontSize": "40px"}}
             code@{ form: rounded, img: "../_static/img/logo/code.svg", w: 200, h: 200}
             pytest@{ img: "../_static/img/logo/pytest.svg", w: 200, h: 200}
             ruff@{ img: "../_static/img/logo/ruff.svg", w: 200, h: 200}
-            
+
             uv --> code
             uv --> pytest
             uv --> ruff
         end
         style T1 fill:none,stroke:none
     end
-     
+
     subgraph Tier2 [Grades 4-7]
         subgraph T2 [" "]
-    
+
             direction LR
             subgraph T2L [" "]
                 direction TB
@@ -36,7 +34,7 @@ config: {"themeVariables": {"fontSize": "40px"}}
                 readme@{ img: "../_static/img/logo/readme.svg", w: 200, h: 200}
                 sphinx@{ img: "../_static/img/logo/sphinx.svg", w: 200, h: 200}
                 sphinx_plus@{ img: "../_static/img/logo/sphinx_plus.svg", w: 200, h: 200}
-                
+
                 ty & readme --> sphinx --> sphinx_plus
             end
             subgraph T2R [" "]
@@ -45,18 +43,18 @@ config: {"themeVariables": {"fontSize": "40px"}}
                 cli@{ img: "../_static/img/logo/click.svg", w: 200, h: 200}
                 poe@{ img: "../_static/img/logo/poe.svg", w: 200, h: 200}
                 flamegraph@{ img: "../_static/img/logo/flamegraph.svg", w: 200, h: 200}
-                
+
                 pytest_plus & cli ~~~ poe & flamegraph
             end
-           
+
             T2L ~~~ T2R
-            
+
             style T2L fill:none,stroke:none,padding:200px
             style T2R fill:none,stroke:none,padding:200px
         end
         style T2 fill:none,stroke:none
     end
-     
+
     subgraph Tier3 [Grades 8+]
         subgraph T3 [" "]
             direction TB
@@ -69,7 +67,7 @@ config: {"themeVariables": {"fontSize": "40px"}}
 
     Tier1 ~~~ Tier2
     Tier2 ~~~ Tier3
-    
+
     style Tier1 fill:none,stroke:#8ac76b,stroke-width:10
     style Tier2 fill:none,stroke:#8ac76b,stroke-width:10
     style Tier3 fill:none,stroke:#8ac76b,stroke-width:10
@@ -78,7 +76,7 @@ config: {"themeVariables": {"fontSize": "40px"}}
     click code call showDescription(code.html)
     click pytest call showDescription(pytest.html)
     click ruff call showDescription(ruff.html)
-    
+
     click ty call showDescription(ty.html)
     click readme call showDescription(readme.html)
     click sphinx call showDescription(sphinx.html)
@@ -87,7 +85,7 @@ config: {"themeVariables": {"fontSize": "40px"}}
     click cli call showDescription(cli.html)
     click poe call showDescription(poe.html)
     click flamegraph call showDescription(flamegraph.html)
-    
+
     click cicd call showDescription(cicd.html)
     click pypi call showDescription(pypi.html)
     click sphinx_flamegraph call showDescription(sphinx_flamegraph.html)

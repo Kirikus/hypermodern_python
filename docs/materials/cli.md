@@ -66,14 +66,16 @@ Decorator-based, excellent for complex CLIs with more-or-less standard behaviour
 ```python
 import click
 
+
 @click.command()
 @click.argument("name")
 @click.option("--greeting", default="Hello", help="Greeting prefix")
 def greet(name: str, greeting: str):
-   print(f"{greeting} {name}!")
+    print(f"{greeting} {name}!")
+
 
 if __name__ == "__main__":
-   greet()
+    greet()
 ```
 
 ### [typer](https://typer.tiangolo.com/)
@@ -85,15 +87,17 @@ import typer
 
 app = typer.Typer()
 
+
 @app.command()
 def greet(
-   name: str,
-   greeting: str = typer.Option("Hello", help="Greeting prefix"),
+    name: str,
+    greeting: str = typer.Option("Hello", help="Greeting prefix"),
 ):
-   print(f"{greeting} {name}!")
+    print(f"{greeting} {name}!")
+
 
 if __name__ == "__main__":
-   app()
+    app()
 ```
 
 ## Testing command line interfaces
@@ -114,7 +118,8 @@ def main(argv=None):
     args = parser.parse_args(argv)
     print(f"{args.greeting} {args.name}!")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     sys.exit(main())
 ```
 
@@ -133,7 +138,9 @@ These packages provide a special class `CLIRunner` for testing purposes, use it.
 
 ```python
 from click.testing import CliRunner
+
 # or from typer.testing import CliRunner
+
 
 def test_greeting():
     runner = CliRunner()

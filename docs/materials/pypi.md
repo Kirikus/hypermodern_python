@@ -1,5 +1,5 @@
 # TODO: PyPI: publishing and distributing code
 
-:::{todo}
+```{todo}
 Write later.
-:::
+```

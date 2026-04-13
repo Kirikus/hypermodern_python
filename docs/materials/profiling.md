@@ -8,7 +8,7 @@ Profiling refers to the systematic measurement and analysis of a running program
 
 Improving performance always starts with profiling because intuition about slow sections is frequently incorrect. Changes made without data can introduce new issues or fail to deliver meaningful gains. Profiling ensures that optimization efforts focus on the most impactful areas first.
 
-While a lot of performance metrics can be measured, such as memory and time usage, disk operations, cache misses, etc., this manual focuses on measuring what code parts (functions or individual lines) contibute to the total execution time.
+While a lot of performance metrics can be measured, such as memory and time usage, disk operations, cache misses, etc., this manual focuses on measuring what code parts (functions or individual lines) contribute to the total execution time.
 
 ## Naive approach
 

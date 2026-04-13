@@ -1,5 +1,7 @@
 ````{div}
-:name: description
+---
+name: description
+---
 ```{image} ../../_static/img/logo/pytest.svg?raw=true
 :align: left
 :class: img-bg-fill
@@ -9,7 +11,7 @@
 
 [\[Reference\]](../materials/tests)
 
-Project uses `pytest` for testing purposes. 
+Project uses `pytest` for testing purposes.
 
 Tests are readable and well-written.
 

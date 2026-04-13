@@ -1,5 +1,7 @@
 ````{div}
-:name: description
+---
+name: description
+---
 ```{image} ../../_static/img/logo/ty.svg?raw=true
 :align: left
 :class: img-bg-fill
