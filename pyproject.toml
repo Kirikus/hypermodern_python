@@ -45,6 +45,7 @@ docs = [
   "sphinxcontrib-mermaid>=2.0.1",
 ]
 tests = [
+  "coverage>=7.13.5",
   "pytest>=9.0.2",
   "pytest-clarity>=1.0.1",
   "pytest-cov>=7.0.0",
@@ -156,6 +157,7 @@ source_suffix = { ".rst" = "restructuredtext", ".md" = "markdown" }
 [tool.poe.tasks]
 # === Core / Development tasks ===
 test = { cmd = "pytest --cov", help = "Run the test suite with coverage reporting" }
+test-coverage = { cmd = "coverage run -m pytest tests/", help = "Generates .coverage" }
 pywc = { cmd = "pywc", help = "Run the pywc command-line tool" }
 # === Individual code quality / formatting tasks ===
 format_py = { cmd = "ruff format", help = "Format Python code using Ruff" }
