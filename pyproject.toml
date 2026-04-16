@@ -4,7 +4,7 @@ requires = [ "uv-build>=0.7.20,<0.8" ]
 
 [project]
 name = "pywc-hypermodern"
-version = "0.1.0"
+version = "0.1.2"
 description = 'Redesigned course based on older articles "Hypermodern Python" by Claudio Jolowicz.'
 readme = "README.md"
 authors = [ { name = "Dersbyshev Dmitry", email = "kirikusan@gmail.com" } ]
