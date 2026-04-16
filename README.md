@@ -1,5 +1,9 @@
 # hypermodern_python
 
+[![CI](https://github.com/Kirikus/hypermodern_python/actions/workflows/pre-commit.yaml/badge.svg)](https://github.com/Kirikus/hypermodern_python/actions/workflows/pre-commit.yaml)
+[![Coverage](https://raw.githubusercontent.com/Kirikus/hypermodern_python/python-coverage-comment-action-data/badge.svg)](https://htmlpreview.github.io/?https://github.com/Kirikus/hypermodern_python/blob/python-coverage-comment-action-data/htmlcov/index.html)
+[![Documentation](https://app.readthedocs.org/projects/kirikus-hypermodern-python/badge/?version=latest)](https://kirikus-hypermodern-python.readthedocs.io/en/latest/?badge=latest)
+
 Redesigned course based on older articles "Hypermodern Python" by Claudio Jolowicz.
 
 Provides a pywc utility as an example project, which is similar to wc.
@@ -12,7 +16,7 @@ Provides a pywc utility as an example project, which is similar to wc.
 
 ## Learning this course
 
-For now, build docs and read them for:
+Read [documentation](https://kirikus-hypermodern-python.readthedocs.io/en/latest/) for:
 
 - Materials
 - Grading criteria
