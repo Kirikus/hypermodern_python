@@ -121,7 +121,7 @@ class TestConsole:
         """Version option has correct value."""
         result = runner.invoke(main, ["--version"])
         assert result.exit_code == 0
-        assert version("pywc") in result.output
+        assert version("pywc_hypermodern") in result.output
 
     def test_main_calls_process_path_for_each_provided_path(
         self, runner: CliRunner, mocked: SimpleNamespace, small_file: Path, mocker: MockerFixture

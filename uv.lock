@@ -1091,7 +1091,7 @@ wheels = [
 ]
 
 [[package]]
-name = "pywc"
+name = "pywc-hypermodern"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

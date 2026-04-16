@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 
 @click.command()
-@click.version_option(version=version("pywc"))
+@click.version_option(version=version("pywc_hypermodern"))
 @click.option("-c", "--bytes", "byte_count", is_flag=True, help="Count bytes")
 @click.option("-m", "--characters", "chars", is_flag=True, help="Count characters")
 @click.option("-w", "--words", "words", is_flag=True, help="Count words")
