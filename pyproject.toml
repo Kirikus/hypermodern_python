@@ -120,6 +120,7 @@ skip_covered = false  # ← important: do NOT hide 100% files
 sort = "Cover"  # or "Miss", "Name", etc.
 fail_under = 95
 [tool.coverage.run]
+relative_files = true
 source = [ "src/pywc" ]
 omit = [
   "tests/*",
