@@ -1,5 +1,6 @@
 # hypermodern_python
 
+[![PyPI - Version](https://img.shields.io/pypi/v/pywc-hypermodern?pypiBaseUrl=https%3A%2F%2Ftest.pypi.org&label=TestPyPI)](https://test.pypi.org/project/pywc-hypermodern/)
 [![CI](https://github.com/Kirikus/hypermodern_python/actions/workflows/pre-commit.yaml/badge.svg)](https://github.com/Kirikus/hypermodern_python/actions/workflows/pre-commit.yaml)
 [![Coverage](https://raw.githubusercontent.com/Kirikus/hypermodern_python/python-coverage-comment-action-data/badge.svg)](https://htmlpreview.github.io/?https://github.com/Kirikus/hypermodern_python/blob/python-coverage-comment-action-data/htmlcov/index.html)
 [![Documentation](https://app.readthedocs.org/projects/kirikus-hypermodern-python/badge/?version=latest)](https://kirikus-hypermodern-python.readthedocs.io/en/latest/?badge=latest)
