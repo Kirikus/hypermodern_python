@@ -30,6 +30,7 @@ dev = [
   "rstfmt>=0.0.14",
   "ruff>=0.15.5",
   "scour>=0.38.2",
+  "twine>=6.2.0",
   "ty>=0.0.29",
   { include-group = "docs" },
   { include-group = "tests" },
