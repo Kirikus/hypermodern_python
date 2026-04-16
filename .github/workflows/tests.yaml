@@ -37,6 +37,9 @@ jobs:
           if-no-files-found: ignore
 
   coverage-comment:
+    permissions:
+      pull-requests: write
+      contents: write
     needs: test
     runs-on: ubuntu-latest
     steps:
